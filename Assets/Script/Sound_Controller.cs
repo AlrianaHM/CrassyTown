@@ -13,15 +13,24 @@ public class Sound_Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 scale = new Vector3 (0, 0, 0);
+		StartCoroutine (wait ());
 		if (GameObject.FindGameObjectWithTag ("Audio")) {
 			aud = GameObject.FindGameObjectWithTag ("Audio");
 		}
 		vol = aud.GetComponent<volume> ();
-		if(vol.loudness > 5f)
-			transform.localScale = new Vector3 (vol.loudness, 0.6f, 0.6f);
+		if (vol.loudness > 5f) {
+			vol.loudness /= 5;
+			if (vol.loudness > 5f)
+				vol.loudness = 4.5f;
+			transform.localScale = new Vector3 (vol.loudness / 5, 0.6f, 0.6f);
+		}
 		else transform.localScale = new Vector3 (0f, 0.6f, 0.6f);
 			
 			
+	}
+
+
+	IEnumerator wait(){
+		yield return new WaitForSeconds (1);
 	}
 }

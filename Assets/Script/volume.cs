@@ -18,11 +18,13 @@ public class volume : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		loudness = GetAverageVol () * sensitivity;
 		Debug.Log ("Loudness: " + loudness);
 	}
 
 	float GetAverageVol(){
+		
 		float[] data = new float[1024];
 		float a = 0;
 		GetComponent<AudioSource>().GetOutputData (data, 0);
@@ -32,5 +34,7 @@ public class volume : MonoBehaviour {
 
 		return a / 1024;
 	}
+
+
 
 }
